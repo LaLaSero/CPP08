@@ -23,15 +23,11 @@ public:
 
     template <typename Iterator>
     void addNumbers(Iterator begin, Iterator end) {
-        while (begin != end) 
-        {
-            if (_stock.size() >= _n)
-            {
-                throw std::runtime_error("Span is full");
-            }
-            _stock.push_back(*begin);
-            ++begin;
+        std::vector<int> tmp(begin, end);
+        if (tmp.size() > _n - _stock.size()) {
+            throw std::runtime_error("Span is full");
         }
+        _stock.insert(_stock.end(), tmp.begin(), tmp.end());
     }
 };
 

@@ -21,7 +21,6 @@ Span& Span::operator=(const Span &cp)
     return *this;
 }
 
-
 void Span::addNumber(int n)
 {
     if (_stock.size() >= _n)
@@ -42,7 +41,8 @@ unsigned int Span::shortestSpan() const
     unsigned int minSpan = std::numeric_limits<unsigned int>::max();
     for (size_t i = 1; i < sortedStock.size(); ++i)
     {
-        unsigned int span = sortedStock[i] - sortedStock[i - 1];
+        unsigned int span = static_cast<unsigned int>(sortedStock[i])
+            - static_cast<unsigned int>(sortedStock[i - 1]);
         if (span < minSpan)
             minSpan = span;
     }
@@ -56,7 +56,8 @@ unsigned int Span::longestSpan() const
 
     int min = *std::min_element(_stock.begin(), _stock.end());
     int max = *std::max_element(_stock.begin(), _stock.end());
-    long long diff = static_cast<long long>(max) - static_cast<long long>(min);
+    unsigned int umin = static_cast<unsigned int>(min);
+    unsigned int umax = static_cast<unsigned int>(max);
 
-    return static_cast<unsigned int>(diff);
+    return umax - umin;
 }

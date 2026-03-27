@@ -1,5 +1,5 @@
-#include <iostream>
 #include "Span.hpp"
+#include <iostream>
 #include <vector>
 #include <list>
 
@@ -45,4 +45,23 @@ int main(void)
         }
     }
 
+    std::cout << "\n10000 numbers test" << std::endl;
+    try {
+        const unsigned int testSize = 10000;
+        Span bigSpan(testSize);
+        std::vector<int> values;
+
+        values.reserve(testSize);
+        for (unsigned int i = 0; i < testSize; ++i) {
+            values.push_back(static_cast<int>(i));
+        }
+        bigSpan.addNumbers(values.begin(), values.end());
+
+        std::cout << "shortestSpan: " << bigSpan.shortestSpan() << std::endl;
+        std::cout << "longestSpan: " << bigSpan.longestSpan() << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "Error: " << e.what() << std::endl;
+    }
+
+    return 0;
 }
