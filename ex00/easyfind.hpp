@@ -7,7 +7,12 @@
 class ValueNotFoundException : public std::exception
 {
 public:
-    const char* what() const throw() { 
+    ValueNotFoundException() {}
+    ValueNotFoundException(const ValueNotFoundException& other) : std::exception(other) {}
+    ValueNotFoundException& operator=(const ValueNotFoundException&) { return *this; }
+    virtual ~ValueNotFoundException() throw() {}
+
+    virtual const char* what() const throw() {
         return "Error: Value not found.";
     }
 };
